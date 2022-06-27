@@ -1,0 +1,29 @@
+.swiper-container {
+  display: flex;
+  align-items: center;
+}
+
+.swiper {
+  width: 364px;
+  height: 364px;
+  border-radius: 30px;
+  margin: 0 26px;
+}
+
+.swiper-prev {
+  background-image: url(../../assets/prev.png);
+  background-position: center center;
+  background-size: 24px 24px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.swiper-next {
+  background-image: url(../../assets/next.png);
+  background-position: center center;
+  background-size: 24px 24px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}

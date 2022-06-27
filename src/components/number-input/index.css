@@ -1,0 +1,37 @@
+.ui-number-input {
+    display: inline-flex;
+    height: 44px;
+}
+
+.ui-number-input input {
+    text-align: center;
+    background-color: #fff;
+    border: 0 none;
+    margin: 0 -4px;
+    outline: none;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.input-minus,
+.input-plus {
+    height: 44px;
+    width: 44px;
+    background: url('./minus.png') no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    transition: all ease .3s;
+    transform-origin: center;
+}
+
+.input-minus:hover,
+.input-plus:hover {
+    opacity: .6;
+    transform: scale(1.06);
+}
+
+.input-plus {
+    background-image: url('./plus.png');
+}
