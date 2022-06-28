@@ -15,9 +15,12 @@ function Home() {
   const [maxSupply , setMaxSupply] = useState<number>()
   const [totalSupply , setTotalSupply] = useState<number>()
   const [status , setStatus] = useState<number>()
-  const [minted , setMinted] = useState<boolean | null>(null)
+  const [minted , setMinted] = useState<number | null>(null)
   const [claimStatus , setClaim] = useState<string | null>(null)
+  const [pendingTX , setPendingTX] = useState<string | null>(null)
   const [amount , setAmount] = useState<number>(1)
+
+  const max = status === 1 ? 2-minted : 5-minted
 
   const load = async (address?: string | null) => {
     setLoading(true)
@@ -29,8 +32,8 @@ function Home() {
       setMaxSupply(max)
       if(account){
         const toNumber = (await nft.numberMinted(address)).toNumber();
-        setMinted(toNumber >= 1)
-        console.log(stage);
+        setMinted(toNumber)
+        setAmount(Math.max((status === 1 ? 2-minted : 5-minted), amount))
       }
     }catch (e){
       console.log(e);
@@ -43,28 +46,31 @@ function Home() {
   },[account, chainId])
 
   const label = useMemo(() => {
-    if(amount <= 1 && totalSupply< 2500) {
+    if(amount <= 1 && totalSupply< 2500 && minted ===0 ) {
       return 'FREE MINT'
     } else {
       return 'PUBLIC MINT'
     }
-  }, [amount, maxSupply])
+  }, [amount, maxSupply, minted])
 
   const cost = useMemo(() => {
-    if(amount <= 1 && totalSupply< 2500) {
+    if(amount <= 1 && totalSupply< 2500 && minted ===0) {
       return 0
     } else {
       return amount * 0.0069
     }
-  }, [amount, maxSupply])
+  }, [amount, maxSupply, minted])
 
   const handleClick = async () => {
     if(account) {
       if(claimStatus === 'loading') {
         return false
       }
-      const tx = await nft.mint()
+      const tx = await nft.mint(amount, {
+        value: '' + cost * 10**18,
+      })
       setClaim('loading')
+      setPendingTX(tx.hash)
       try {
         const recept = await tx.wait()
         setClaim('success')
@@ -72,7 +78,7 @@ function Home() {
         console.log(e);
         setClaim('fail')
       }
-      load()
+      load(account)
     }else {
       connect()
     }
@@ -83,7 +89,7 @@ function Home() {
       if(claimStatus === 'loading') {
         return false
       }
-      const tx = await nft.whitelistMint(proof, 1)
+      const tx = await nft.whitelistMint(proof, amount)
       setClaim('loading')
       try {
         const recept = await tx.wait()
@@ -92,7 +98,7 @@ function Home() {
         console.log(e);
         setClaim('fail')
       }
-      load()
+      load(account)
     }else {
       connect()
     }
@@ -128,7 +134,7 @@ function Home() {
                 </div>
               }
               {
-                status > 0 && <NumberInput value={amount} onChange={setAmount} min={1} max={status === 1 ? 2 : 5}/>
+                status > 0 && <NumberInput value={amount} onChange={setAmount} min={1} max={max}/>
               }
               <ul className="home-rules">
                 <li>Whitelist sale (<span className="f-dinpro"> 1000 </span>free mint 2/wallet) <span className="f-dinpro"> 22:00UTC+8 </span></li>
@@ -141,18 +147,18 @@ function Home() {
               }
               {
                 account && <>
-                  {status == 0 && <Button className="home-button" disabled={!!minted}>
+                  {status == 0 && <Button className="home-button" disabled>
                     NOT STARTED
                   </Button>}
-                  {status == 1 && isAllowlist && <Button className="home-button" onClick={handleAllowlistMint} disabled={!!minted}>{
-                    claimStatus === 'loading' ? 'minting...' : minted ? 'MINTED' : 'WHITELIST MINT'
+                  {status == 1 && isAllowlist && <Button className="home-button" onClick={handleAllowlistMint} disabled={minted>0 || amount<=0}>{
+                    claimStatus === 'loading' ? 'minting...' : minted >= 2 ? 'MINTED' : 'WHITELIST MINT'
                   }</Button>}
                   {status == 1 && !isAllowlist && <Button className="home-button" disabled={true}>
                     NOT WHITELISTED
                   </Button>}
                   {
-                    status == 2 && <Button className="home-button" onClick={handleClick} disabled={!!minted}>{
-                      claimStatus === 'loading' ? 'minting...' : minted ? 'MINTED' : label
+                    status == 2 && <Button className="home-button" disabled={amount<=0} onClick={handleClick}>{
+                      claimStatus === 'loading' ? 'minting...' : label
                     }{
                       !!cost && <span className="home-button-cost">{cost.toFixed(4)} ETH</span>
                     }</Button>
@@ -165,10 +171,13 @@ function Home() {
             </>
           }
           {claimStatus === 'success' && <div className="tips tips-success">
-            MINT SUCCESS
+            mint success
+          </div>}
+          {claimStatus === 'loading' && <div className="tips tips-success">
+            minting... {pendingTX && <a href={`https://etherscan.io/tx/${pendingTX}`} target="_blank">view tx</a>}
           </div>}
           {claimStatus === 'fail' && <div className="tips tips-fail">
-            MINT FAIL
+            mint fail
           </div>}
         </div>
       </div>
