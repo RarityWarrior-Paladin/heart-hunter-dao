@@ -33,7 +33,8 @@ function Home() {
       if(account){
         const toNumber = (await nft.numberMinted(address)).toNumber();
         setMinted(toNumber)
-        setAmount(Math.max((status === 1 ? 2-minted : 5-minted), amount))
+        const number = stage === 1 ? 2 - toNumber : 5 - toNumber;
+        setAmount(Math.max(number, amount))
       }
     }catch (e){
       console.log(e);
@@ -157,11 +158,14 @@ function Home() {
                     NOT WHITELISTED
                   </Button>}
                   {
-                    status == 2 && <Button className="home-button" disabled={amount<=0} onClick={handleClick}>{
+                    status == 2 && max > 0 && <Button className="home-button" onClick={handleClick}>{
                       claimStatus === 'loading' ? 'minting...' : label
                     }{
                       !!cost && <span className="home-button-cost">{cost.toFixed(4)} ETH</span>
                     }</Button>
+                  }
+                  {
+                    status == 2 && max <= 0 && <Button className="home-button" disabled>MINTED</Button>
                   }
                   { status == 3 && <Button className="home-button" disabled={!!minted}>
                     COMPLETED
