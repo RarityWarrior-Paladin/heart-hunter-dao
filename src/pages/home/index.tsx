@@ -6,6 +6,7 @@ import "./index.css";
 import useAllowlist from "./useAllowlist";
 import albumImages from "../../utils/albumImages";
 import AlbumSlider from "../../components/albumSlider";
+import Timer from "../../components/timer";
 
 function Home() {
   const { account, chainId, nft, connect, provider} = useContext(Web3Context)
@@ -110,19 +111,28 @@ function Home() {
           {loading && <div className="loading">LOADING...</div>}
           {
             (!loading && !!maxSupply) && <>
-              {status === 0 && <div className="home-title">NOT START</div>}
-              {status === 1 && <div className="home-title">WHITELIST SALE</div>}
-              {status === 2 && <div className="home-title">PUBLIC SALE</div>}
-
+              {status === 0 && <div className="home-title">Not started</div>}
+              {status === 1 && <div className="home-title">Whitelist sale</div>}
+              {status === 2 && <div className="home-title">Public sale</div>}
               {
-                maxSupply && <div className="home-amount">{totalSupply} / {maxSupply}</div>
+                maxSupply && status >0 && <div className="f-dinpro home-amount">{totalSupply} / {maxSupply}</div>
               }
-
-              <NumberInput value={amount} onChange={setAmount} min={1} max={status === 1 ? 2 : 5}/>
-
+              {
+                status == 0 && <div>
+                  <Timer startTime={1656597600000} onFinish={() => load(account)} />
+                </div>
+              }
+              {
+                status == 1 && <div>
+                  <Timer startTime={1656604800000} onFinish={() => load(account)} />
+                </div>
+              }
+              {
+                status > 0 && <NumberInput value={amount} onChange={setAmount} min={1} max={status === 1 ? 2 : 5}/>
+              }
               <ul className="home-rules">
-                <li>Whitelist sale (1000free mint2 / walletat) 22 : 00 UTC + 8</li>
-                <li>Public sale (1500 free mint1 / wallet + 2555 / 0 . 0069eth at 24 : 00 UTC + 8</li>
+                <li>Whitelist sale (<span className="f-dinpro"> 1000 </span>free mint 2/wallet) <span className="f-dinpro"> 22:00UTC+8 </span></li>
+                <li>Public sale (<span className="f-dinpro"> 1500 </span> free mint 1/wallet + <span className="f-dinpro">2555</span> / <span className="f-dinpro">0.0069</span>eth at <span className="f-dinpro">24:00UTC+8</span></li>
               </ul>
               {
                 !account && <Button className="home-button" onClick={connect}>

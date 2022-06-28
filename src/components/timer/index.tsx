@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useMemo, useState } from 'react'
-import classNames from 'classnames'
+import  './index.css'
 
 interface TagProps {
   time?: number
@@ -37,18 +37,24 @@ const Timer = (props: PropsWithChildren<TagProps>) => {
     return () => clearInterval(interval)
   }, [startTime])
 
-  const text = useMemo(() => {
+  const config = useMemo(() => {
     const h = progress / 60 / 60;
     const m = progress / 60 ;
-    return `${h>1 ? `${Math.floor(h)} Hours` : '' } ${
-      m>1 ? `${Math.floor(m % 60)} Minutes` : ''
-    } ${Math.floor(progress % 60)} Seconds`
+    return {
+      h: Math.floor(h),
+      m: Math.floor(m % 60),
+      s: Math.floor(progress % 60)
+    }
   }, [progress])
 
   return (
-    <span className="" {...rest}>
-      {text}
-    </span>
+    <div className="ui-timer" {...rest}>
+      <span className="timer-item f-dinpro">{`${config.h}`.padStart(2, '0')}</span>
+      <span className="timer-divider">:</span>
+      <span className="timer-item f-dinpro">{`${config.m}`.padStart(2, '0')}</span>
+      <span className="timer-divider">:</span>
+      <span className="timer-item f-dinpro">{`${config.s}`.padStart(2, '0')}</span>
+    </div>
   )
 }
 

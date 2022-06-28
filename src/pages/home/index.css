@@ -95,3 +95,32 @@
 .tips-fail {
   color: #FF603E;
 }
+
+@media only screen and (max-width: 1100px) {
+  .home_container {
+    width: 90%;
+    padding: 40px 40px;
+  }
+}
+
+
+@media only screen and (max-width: 800px) {
+  .home {
+    flex-wrap: wrap;
+  }
+
+  .home_container {
+    top: 80px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .home .home-demo {
+    width: 100%;
+  }
+
+  .home .home-content {
+    width: 100%;
+    margin-left: 0;
+  }
+}

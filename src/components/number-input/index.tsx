@@ -45,7 +45,7 @@ function NumberInput(props: Props) {
       <div className={classnames('input-minus', {
         'disabled': value<=min
       })} onClick={handleMinus} />
-      <input value={text} onChange={(event) => {
+      <input value={text} className="f-dinpro" onChange={(event) => {
         setText(event.target.value)
       }} onBlur={handleChange}/>
       <div className={classnames('input-plus', {
