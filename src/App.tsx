@@ -25,6 +25,7 @@ function App() {
           <div className='logo' />
           <div className="header-actions">
             <a className="link" href="https://twitter.com/HeartHunterDAO" target="_blank">Twitter</a>
+            <a className="link" href="https://discord.gg/hearthunter" target="_blank">Discord</a>
             <a className="link" href="https://opensea.io/collection/hearthunterdao" target="_blank">Opensea</a>
             {
               (correct || !account) && <Button size="S" onClick={account ? () => {} : connect} >
