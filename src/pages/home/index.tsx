@@ -9,7 +9,7 @@ import AlbumSlider from "../../components/albumSlider";
 import Timer from "../../components/timer";
 
 function Home() {
-  const { account, chainId, nft, connect, provider} = useContext(Web3Context)
+  const { account, chainId, nft, connect, switchNetwork} = useContext(Web3Context)
   const {isAllowlist, proof} = useAllowlist();
   const [loading , setLoading] = useState<boolean>()
   const [maxSupply , setMaxSupply] = useState<number>()
@@ -19,6 +19,9 @@ function Home() {
   const [claimStatus , setClaim] = useState<string | null>(null)
   const [pendingTX , setPendingTX] = useState<string | null>(null)
   const [amount , setAmount] = useState<number>(1)
+
+
+  const correct = chainId === 1
 
   const max = status === 1 ? 2-minted : 5-minted
 
@@ -34,7 +37,7 @@ function Home() {
         const toNumber = (await nft.numberMinted(address)).toNumber();
         setMinted(toNumber)
         const number = stage === 1 ? 2 - toNumber : 5 - toNumber;
-        setAmount(Math.max(number, amount))
+        setAmount(Math.min(number, amount))
       }
     }catch (e){
       console.log(e);
@@ -58,7 +61,7 @@ function Home() {
     if(amount <= 1 && totalSupply< 2500 && minted ===0) {
       return 0
     } else {
-      return amount * 0.0069
+      return (amount - (minted ? 0 : 1)) * 0.0069
     }
   }, [amount, maxSupply, minted])
 
@@ -117,7 +120,7 @@ function Home() {
         <div className="home-content">
           {loading && <div className="loading">LOADING...</div>}
           {
-            (!loading && !!maxSupply) && <>
+            (!loading) && <>
               {status === 0 && <div className="home-title">Not started</div>}
               {status === 1 && <div className="home-title">Whitelist sale</div>}
               {status === 2 && <div className="home-title">Public sale</div>}
@@ -126,12 +129,12 @@ function Home() {
               }
               {
                 status == 0 && <div>
-                  <Timer startTime={1656597600000} onFinish={() => load(account)} />
+                  <Timer startTime={1656590400000} onFinish={() => load(account)} />
                 </div>
               }
               {
                 status == 1 && <div>
-                  <Timer startTime={1656604800000} onFinish={() => load(account)} />
+                  <Timer startTime={1656601200000} onFinish={() => load(account)} />
                 </div>
               }
               {
@@ -144,6 +147,11 @@ function Home() {
               {
                 !account && <Button className="home-button" onClick={connect}>
                   CONNECT
+                </Button>
+              }
+              {
+                chainId !== 1 && <Button className="home-button" onClick={switchNetwork}>
+                  SWITCH NETWORK
                 </Button>
               }
               {
