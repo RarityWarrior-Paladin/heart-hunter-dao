@@ -27,3 +27,11 @@
   height: 24px;
   cursor: pointer;
 }
+
+
+@media only screen and (max-width: 800px) {
+  .swiper {
+    width: 150px;
+    height: 150px;
+  }
+}

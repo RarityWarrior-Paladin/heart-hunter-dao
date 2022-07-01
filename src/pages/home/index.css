@@ -1,4 +1,4 @@
-.home_container {
+.home-container {
   width: 90%;
   padding: 40px 100px;
   max-width: 1200px;
@@ -10,7 +10,7 @@
   color: #181818;
 }
 
-.home_container h3 {
+.home-container h3 {
   font-size: 30px;
   letter-spacing: 1px;
   font-weight: 500;
@@ -19,10 +19,9 @@
   text-align: center;
 }
 
-.home_container h4 {
+.home-container h4 {
   text-align: center;
   font-weight: 300;
-  margin-bottom: 60px;
 }
 
 .loading {
@@ -37,6 +36,12 @@
 
 .home .home-demo {
   width: 500px;
+}
+
+.home-desc {
+  color: rgba(0,0,0,.75);
+  max-width: 900px;
+  margin: 0 auto 30px;
 }
 
 .home .home-content {
@@ -97,7 +102,7 @@
 }
 
 @media only screen and (max-width: 1100px) {
-  .home_container {
+  .home-container {
     width: 90%;
     padding: 40px 40px;
   }
@@ -109,7 +114,7 @@
     flex-wrap: wrap;
   }
 
-  .home_container {
+  .home-container {
     top: 80px;
     margin-top: 30px;
     margin-bottom: 40px;

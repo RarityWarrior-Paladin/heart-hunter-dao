@@ -109,9 +109,10 @@ function Home() {
   }
 
   return (
-    <div className="home_container">
+    <div className="home-container">
       <h3>LOVE LOVES TO LOVE LOVE</h3>
       <h4>No roadmap , Only surprises</h4>
+      <p className="home-desc"> Love loves to love love, The meaning of love is to keep on loving. We love NFT, we love, so NFT appeared. [Love loves] is part of HeartHunter, Created by artist FFAN. Everyone is a container that can be filled with desire, money, and, of course, love.</p>
 
       <div className="home">
         <div className="home-demo">
