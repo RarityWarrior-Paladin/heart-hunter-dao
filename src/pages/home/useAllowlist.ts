@@ -7,6 +7,7 @@ const lowercaseAllowlist = allowlist.map((address) => address.toLowerCase())
 const leafNodes = allowlist.map((addr) => keccak256(addr));
 const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
 
+// console.log(merkleTree.getHexRoot().toString());
 
 const useAllowlist = () => {
   const { account } = useContext(Web3Context)
