@@ -1,3 +1,3 @@
 export const config = {
-  NFT: '0x70E5e5721F6234d0308b1b1E4D275C1aDF7e813b',
+  NFT: '0xd44dc6a31c984b1e138894288985edd17c83d623',
 }
