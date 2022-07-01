@@ -36,8 +36,9 @@ function Home() {
       if(account){
         const toNumber = (await nft.numberMinted(address)).toNumber();
         setMinted(toNumber)
-        const number = stage === 1 ? 2 - toNumber : 5 - toNumber;
-        setAmount(Math.min(number, amount))
+        setAmount(
+          stage === 1 ? Math.max(amount, 2 - toNumber) : Math.min(amount, 5 - toNumber)
+        )
       }
     }catch (e){
       console.log(e);
