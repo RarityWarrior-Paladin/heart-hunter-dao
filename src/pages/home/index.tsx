@@ -130,20 +130,20 @@ function Home() {
               }
               {
                 status == 0 && <div>
-                  <Timer startTime={1656763200000} onFinish={() => load(account)} />
+                  <Timer startTime={1656691200000} onFinish={() => load(account)} />
                 </div>
               }
               {
                 status == 1 && <div>
-                  <Timer startTime={1656774000000} onFinish={() => load(account)} />
+                  <Timer startTime={1656763200000} onFinish={() => load(account)} />
                 </div>
               }
               {
                 status > 0 && <NumberInput value={amount} onChange={setAmount} min={1} max={max}/>
               }
               <ul className="home-rules">
-                <li>Whitelist sale (<span className="f-dinpro"> 1000 </span>free mint 2/wallet) <span className="f-dinpro"> 22:00UTC+8 </span></li>
-                <li>Public sale (<span className="f-dinpro"> 1500 </span> free mint 1/wallet + <span className="f-dinpro">2555</span> / <span className="f-dinpro">0.0069</span>eth at <span className="f-dinpro">24:00UTC+8</span></li>
+                <li>Whitelist sale (<span className="f-dinpro"> 1500 </span>free mint 2/wallet) <span className="f-dinpro">July 2, 00:00 (UTC+8)</span></li>
+                <li>Public sale (<span className="f-dinpro"> 1000 </span> free mint 1/wallet + <span className="f-dinpro">2555</span> / <span className="f-dinpro">0.0069</span>eth) at <span className="f-dinpro">July 2 , 20:00（UTC+8）</span></li>
               </ul>
               {
                 !account && <Button className="home-button" onClick={connect}>
