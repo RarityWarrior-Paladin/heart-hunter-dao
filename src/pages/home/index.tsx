@@ -93,7 +93,7 @@ function Home() {
       if(claimStatus === 'loading') {
         return false
       }
-      const tx = await nft.whitelistMint(proof, amount)
+      const tx = await nft.allowlistMint(proof, amount)
       setClaim('loading')
       try {
         const recept = await tx.wait()
