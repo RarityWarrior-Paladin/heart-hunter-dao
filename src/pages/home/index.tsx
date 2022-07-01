@@ -129,12 +129,12 @@ function Home() {
               }
               {
                 status == 0 && <div>
-                  <Timer startTime={1656590400000} onFinish={() => load(account)} />
+                  <Timer startTime={1656763200000} onFinish={() => load(account)} />
                 </div>
               }
               {
                 status == 1 && <div>
-                  <Timer startTime={1656601200000} onFinish={() => load(account)} />
+                  <Timer startTime={1656774000000} onFinish={() => load(account)} />
                 </div>
               }
               {
@@ -150,7 +150,7 @@ function Home() {
                 </Button>
               }
               {
-                chainId !== 1 && <Button className="home-button" onClick={switchNetwork}>
+                chainId && chainId !== 1 && <Button className="home-button" onClick={switchNetwork}>
                   SWITCH NETWORK
                 </Button>
               }
