@@ -62,7 +62,7 @@ function Home() {
     if(amount <= 1 && totalSupply< 2500 && minted ===0) {
       return 0
     } else {
-      return (amount - (minted ? 0 : 1)) * 0.0069
+      return (amount) * 0.0069
     }
   }, [amount, maxSupply, minted])
 
