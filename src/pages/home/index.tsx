@@ -131,12 +131,12 @@ function Home() {
               }
               {
                 status == 0 && <div>
-                  <Timer startTime={1656691200000} onFinish={() => load(account)} />
+                  {/*<Timer startTime={1656691200000} onFinish={() => load(account)} />*/}
                 </div>
               }
               {
                 status == 1 && <div>
-                  <Timer startTime={1656763200000} onFinish={() => load(account)} />
+                  {/*<Timer startTime={1656763200000} onFinish={() => load(account)} />*/}
                 </div>
               }
               {
@@ -159,7 +159,7 @@ function Home() {
               {
                 account && <>
                   {status == 0 && <Button className="home-button" disabled>
-                    NOT STARTED
+                    MINT ENDED
                   </Button>}
                   {status == 1 && isAllowlist && <Button className="home-button" onClick={handleAllowlistMint} disabled={minted>0 || amount<=0}>{
                     claimStatus === 'loading' ? 'minting...' : minted >= 2 ? 'MINTED' : 'WHITELIST MINT'
