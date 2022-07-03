@@ -3,14 +3,19 @@
     height: 44px;
 }
 
-.ui-number-input input {
-    text-align: center;
+.ui-number-input .select {
+    padding: 0 20px;
     background-color: #fff;
+    margin: 0 -5px;
+}
+.ui-number-input select {
+    text-align: center;
     border: 0 none;
-    margin: 0 -4px;
     outline: none;
     font-weight: 500;
     font-size: 18px;
+    width: 200px;
+    height: 100%;
 }
 
 .input-minus,

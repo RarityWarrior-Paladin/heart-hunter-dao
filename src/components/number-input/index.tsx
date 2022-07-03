@@ -1,6 +1,7 @@
 import {PropsWithChildren, useContext, useEffect, useRef, useState} from 'react'
 import classnames from 'classnames'
 import './index.css'
+import {range} from "lodash-es";
 
 type Props = PropsWithChildren<{
  value: number
@@ -34,7 +35,6 @@ function NumberInput(props: Props) {
   }
 
   useEffect(() => {
-    console.log(value);
     setText(value)
   }, [value])
 
@@ -45,9 +45,16 @@ function NumberInput(props: Props) {
       <div className={classnames('input-minus', {
         'disabled': value<=min
       })} onClick={handleMinus} />
-      <input value={text} className="f-dinpro" onChange={(event) => {
-        setText(event.target.value)
-      }} onBlur={handleChange}/>
+      <div className="select">
+        <select className="f-dinpro"
+                value={text}
+                onChange={handleChange}
+        >
+          {range(1, max+1).map((n) => {
+            return <option value={n} key={n}>{n}</option>
+          })}
+        </select>
+      </div>
       <div className={classnames('input-plus', {
         'disabled': value>=max
       })} onClick={handleAdd} />

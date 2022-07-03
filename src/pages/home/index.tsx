@@ -23,7 +23,7 @@ function Home() {
 
   const correct = chainId === 1
 
-  const max = status === 1 ? 2-minted : 5-minted
+  const max = status === 1 ? 2-minted : 50-minted
 
   const load = async (address?: string | null) => {
     setLoading(true)
@@ -37,7 +37,7 @@ function Home() {
         const toNumber = (await nft.numberMinted(address)).toNumber();
         setMinted(toNumber)
         setAmount(
-          stage === 1 ? Math.max(amount, 2 - toNumber) : Math.min(amount, 5 - toNumber)
+          stage === 1 ? Math.max(amount, 2 - toNumber) : Math.min(amount, 50 - toNumber)
         )
       }
     }catch (e){
