@@ -4,7 +4,7 @@
 
 @font-face {
     font-family: "DINPro";
-    src: url("./fonts/DINPro.ttf")
+    src: url("src/mint/fontst/fonts/DINPro.ttf")
 }
 
 
@@ -43,7 +43,7 @@ header .link:hover {
 }
 
 .logo {
-  background: url(./logo.png) no-repeat center;
+  background: url(src/mint/logo.png) no-repeat center;
   background-size: contain;
   width: 100px;
   height: 100px;

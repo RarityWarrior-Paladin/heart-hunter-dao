@@ -22,7 +22,7 @@
 .input-plus {
     height: 44px;
     width: 44px;
-    background: url('./minus.png') no-repeat;
+    background: url('src/mint/components/number-input/minus.png') no-repeat;
     background-size: cover;
     position: relative;
     z-index: 2;
@@ -38,5 +38,5 @@
 }
 
 .input-plus {
-    background-image: url('./plus.png');
+    background-image: url('src/mint/components/number-input/plus.png');
 }

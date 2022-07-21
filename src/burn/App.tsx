@@ -1,4 +1,4 @@
-import {Web3Context, Web3ContextProvider} from './context/web3-context'
+import {Web3Context, Web3ContextProvider} from '../share/context/web3-context'
 import './App.css'
 import './index.css'
 import {
@@ -22,36 +22,28 @@ function App() {
     <div>
       <div className="main">
         <header>
-          <div className='logo' />
-          <div className="header-actions">
-            <a className="link" href="https://twitter.com/HeartHunterDAO" target="_blank">Twitter</a>
-            <a className="link" href="https://opensea.io/collection/love-loves-to-love-love" target="_blank">Opensea</a>
-            {
-              (correct || !account) && <Button size="S" onClick={account ? () => {} : connect} >
-                {account ? truncateAddress(account) : 'CONNECT WALLET'}
-              </Button>
-            }
-            {
-              !correct && chainId && <Button size="S" onClick={switchNetwork} danger >
-                SWITCH NETWORK
-              </Button>
-            }
+          <div className="header-main">
+            <div className='logo' />
+            <div className="header-actions">
+              <a className="link" href="https://twitter.com/HeartHunterDAO" target="_blank">Twitter</a>
+              <a className="link" href="https://opensea.io/collection/love-loves-to-love-love" target="_blank">Opensea</a>
+              {
+                  (correct || !account) && <Button size="S" onClick={account ? () => {} : connect} >
+                    {account ? truncateAddress(account) : 'CONNECT WALLET'}
+                  </Button>
+              }
+              {
+                  !correct && chainId && <Button size="S" onClick={switchNetwork} danger >
+                    SWITCH NETWORK
+                  </Button>
+              }
+            </div>
           </div>
         </header>
         <Outlet/>
         <footer>
         </footer>
       </div>
-      <video className="video"
-             autoPlay
-             muted={true}
-             poster={cover}
-             src={mp4}
-             loop
-             preload="auto"
-             playsInline
-             controls={false}
-      />
     </div>
   )
 }

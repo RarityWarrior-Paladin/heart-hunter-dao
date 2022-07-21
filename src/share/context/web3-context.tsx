@@ -2,9 +2,9 @@ import React, {useEffect, useState, useRef, PropsWithChildren} from 'react';
 import { isString } from 'lodash-es';
 import {Contract, ethers} from "ethers";
 import {JsonRpcProvider} from "@ethersproject/providers/src.ts/json-rpc-provider";
-import {toHex} from "../utils";
-import {config} from "../config";
-import nftABI from "../abis/nft.json";
+import {toHex} from "../../burn/utils";
+import {config} from "../../burn/config";
+import nftABI from "../../burn/abis/nft.json";
 
 export interface Web3ContextValue {
   chainId?: number,
