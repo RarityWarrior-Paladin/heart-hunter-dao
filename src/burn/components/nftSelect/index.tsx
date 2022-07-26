@@ -1,10 +1,24 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { Web3Context } from '../../../share/context/web3-context'
 import Button from '../button'
 import './index.css'
 
 
-function NftSelect(props: { nftIds: Array<number> }) {
-  const {nftIds} = props
+function NftSelect() {
+  const {account, nft} = useContext(Web3Context)
+
+  const [loading, setLoading] = useState<boolean>(true)
+  const [nftIds, setNftIds] = useState<Array<number>>([])
+
+  useEffect(() => {
+    console.log(account)
+    if (!account) return
+    nft.tokensOfOwner(account).then(ids => {
+      console.log(ids)
+      setNftIds(ids.map(id => id.toNumber()))
+      setLoading(false)
+    })
+  }, [account])
 
   const [selectedNftIds, setSelectNftIds] = useState<Array<number>>([])
 
@@ -12,7 +26,15 @@ function NftSelect(props: { nftIds: Array<number> }) {
 
   const unselectId = id => setSelectNftIds(ids => ids.filter(i => i !== id))
 
-  const unselectedNftIfs = useMemo(() => nftIds.filter(id => !selectedNftIds.includes(id)), [selectedNftIds])
+  const unselectedNftIfs = useMemo(() => nftIds.filter(id => !selectedNftIds.includes(id)), [nftIds, selectedNftIds])
+
+  const cancel = () => setSelectNftIds([])
+  
+  const burn = useCallback(
+    () => {
+      alert(`${account} burn ${selectedNftIds.join(",")}`)
+    },
+    [account, selectedNftIds])
 
   return <div className='nft-select-box'>
     <div className='id-selection'>
@@ -24,8 +46,8 @@ function NftSelect(props: { nftIds: Array<number> }) {
       </div>
     </div>
     <div className="select-actions">
-      <Button size="XS" outlined>取消</Button>
-      <Button size="XS">燃烧</Button>
+      <Button size="XS" outlined onClick={cancel}>取消</Button>
+      <Button size="XS" onClick={burn}>燃烧</Button>
     </div>
   </div>
   

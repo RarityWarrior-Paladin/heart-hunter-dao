@@ -6,7 +6,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      <NftSelect nftIds={[1,2,3]} />
+      <NftSelect />
     </div>
   )
 }

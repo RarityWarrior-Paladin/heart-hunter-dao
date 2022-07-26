@@ -16,7 +16,10 @@
 .unselected {
   border-right: 1px solid;
   flex-basis: 49%;
+  flex-wrap: wrap;
   display: flex;
+  overflow-y: scroll;
+  align-content: flex-start;
 }
 
 .unselectedItem {
@@ -28,6 +31,7 @@
   margin: 2px;
   justify-content: center;
   align-items: center;
+  font-size: 10px;
 }
 
 .unselectedItem:hover {
@@ -38,10 +42,12 @@
 .selected {
   flex-basis: 49%;
   display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  align-content: flex-start;
 }
 
 .selectedItem {
-  width: 50px;
   height: 20px;
   line-height: 20px;
   flex-basis: 50px;
@@ -52,6 +58,7 @@
   border: 1px solid;
   justify-content: space-around;
   align-items: center;
+  font-size: 10px;
 }
 
 .deleteSelectedItem{
