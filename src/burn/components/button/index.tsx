@@ -4,20 +4,22 @@ import './index.css'
 
 type Props = PropsWithChildren<{
  className?: string
- size?: 'L' | 'M' | 'S'
+ size?: 'L' | 'M' | 'S' | 'XS'
  danger?: boolean
+ outlined?: boolean
  disabled?: boolean
  onClick?: () => void
 }>
 
 function Button(props: Props) {
-  const {className, size, children, danger, ...rest} = props
+  const {className, size, children, danger, outlined, ...rest} = props
 
   return (
     <button className={classnames(
       'ui-button',
       `ui-button-size-${size || 'M'}`,
       {['ui-button-danger']:danger},
+      {['ui-button-outlined']:outlined},
       className)}
             {...rest}>
       {children}

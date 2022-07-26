@@ -1,0 +1,74 @@
+.nft-select-box {
+  background-color: white;
+  box-shadow: 0px 4px 12px 0px rgba(0,0,0,0.1500);
+  border-radius: 4px;
+  width: 500px;
+}
+
+.id-selection {
+  display: flex;
+  width: 500px;
+  height: 200px;
+  padding: 9px;
+  justify-content: space-between;
+}
+
+.unselected {
+  border-right: 1px solid;
+  flex-basis: 49%;
+  display: flex;
+}
+
+.unselectedItem {
+  width: 50px;
+  height: 20px;
+  line-height: 20px;
+  display: flex;
+  border-radius: 2px;
+  margin: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.unselectedItem:hover {
+  cursor: pointer;
+  border: 1px solid;
+}
+
+.selected {
+  flex-basis: 49%;
+  display: flex;
+}
+
+.selectedItem {
+  width: 50px;
+  height: 20px;
+  line-height: 20px;
+  flex-basis: 50px;
+  display: flex;
+  border-radius: 2px;
+  margin: 2px;
+  text-align: center;
+  border: 1px solid;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.deleteSelectedItem{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: url('src/burn/components/nftSelect/icons8-close-30.png') center;
+  background-size: contain;
+}
+
+.deleteSelectedItem:hover {
+  cursor: pointer;
+}
+
+.select-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 5px;
+}
