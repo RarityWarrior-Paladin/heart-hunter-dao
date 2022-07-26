@@ -29,10 +29,10 @@
 
 .ui-button-size-XS {
     padding: 0 12px;
-    height: 20px;
-    font-size: 10px;
+    height: 24px;
+    line-height: 22px;
+    font-size: 14px;
 }
-
 
 
 .ui-button:not([disabled]):hover {

@@ -12,8 +12,6 @@ import Home from "./pages/home";
 import Button from "./components/button"
 import {useContext} from "react";
 import { truncateAddress } from "./utils";
-import mp4 from "./assets/demo.mp4";
-import cover from "./assets/cover.jpg";
 
 function App() {
   const {account, chainId, connect, switchNetwork} = useContext(Web3Context)
@@ -40,7 +38,9 @@ function App() {
             </div>
           </div>
         </header>
-        <Outlet/>
+        <div className="container">
+          <Outlet/>
+        </div>
         <footer>
         </footer>
       </div>

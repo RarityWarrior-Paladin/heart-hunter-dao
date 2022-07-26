@@ -9,7 +9,7 @@
   display: flex;
   width: 500px;
   height: 200px;
-  padding: 9px;
+  padding: 10px 10px 0;
   justify-content: space-between;
 }
 
@@ -31,7 +31,7 @@
   margin: 2px;
   justify-content: center;
   align-items: center;
-  font-size: 10px;
+  font-size: 14px;
 }
 
 .unselectedItem:hover {
@@ -48,8 +48,8 @@
 }
 
 .selectedItem {
-  height: 20px;
-  line-height: 20px;
+  height: 24px;
+  line-height: 24px;
   flex-basis: 50px;
   display: flex;
   border-radius: 2px;
@@ -58,7 +58,8 @@
   border: 1px solid;
   justify-content: space-around;
   align-items: center;
-  font-size: 10px;
+  font-size: 12px;
+  padding: 4px;
 }
 
 .deleteSelectedItem{
@@ -76,6 +77,6 @@
 .select-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 5px;
-  padding: 5px;
+  gap: 12px;
+  padding: 12px;
 }

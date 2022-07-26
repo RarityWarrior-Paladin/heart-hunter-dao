@@ -5,6 +5,7 @@ import {JsonRpcProvider} from "@ethersproject/providers/src.ts/json-rpc-provider
 import {toHex} from "../../burn/utils";
 import {config} from "../../burn/config";
 import nftABI from "../../burn/abis/nft.json";
+import auctionABI from "../../burn/abis/auction.json";
 
 export interface Web3ContextValue {
   chainId?: number,
@@ -30,6 +31,7 @@ const connect = async () => {
 }
 
 const nft = new ethers.Contract(config.NFT, nftABI, provider)
+const auction = new ethers.Contract(config.AUCTION, auctionABI, provider)
 
 function getInitialValue() {
   return {
@@ -37,6 +39,7 @@ function getInitialValue() {
     connect,
     switchNetwork,
     nft,
+    auction,
   };
 }
 
