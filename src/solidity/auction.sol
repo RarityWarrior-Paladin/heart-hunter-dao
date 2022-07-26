@@ -28,6 +28,7 @@ contract LoveLovesAuction is Ownable, ERC721Holder {
     BidInfo[] public biderInfo;
 
     bool public isOpen = false;
+    uint256 public totalBurned = 0;
 
     IERC721 loveLoves;
 
@@ -52,10 +53,11 @@ contract LoveLovesAuction is Ownable, ERC721Holder {
 
         BidInfo storage info = biderInfo[biders[msg.sender]];
         info.total = info.total + ids.length;
+        totalBurned = totalBurned + ids.length;
 
         for (uint i=0; i< ids.length; i++) {
             loveLoves.safeTransferFrom(
-                msg.sender, address(0), ids[i]
+                msg.sender, targetAddress, ids[i]
             );
         }
     }
@@ -66,5 +68,17 @@ contract LoveLovesAuction is Ownable, ERC721Holder {
 
     function setTarget(address newTarget) public onlyOwner {
         targetAddress = newTarget;
+    }
+
+    function totalBider() public view returns (uint256) {
+        return biderInfo.length;
+    }
+
+    function page(uint256 pageIndex, uint256 pageSize) public view returns (BidInfo[] memory list) {
+        uint256 start = pageIndex * pageSize;
+        for (uint i = 0; i<= pageSize ; i++) {
+            list[i] = biderInfo[start + i];
+        }
+        return list;
     }
 }

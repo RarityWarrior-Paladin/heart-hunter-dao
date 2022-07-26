@@ -14,6 +14,7 @@ export interface Web3ContextValue {
   connect: () => void,
   switchNetwork: () => void,
   nft: Contract,
+  auction: Contract,
   updateContext?: (key: keyof Web3ContextValue | Partial<Web3ContextValue>, data?: any) => void
 }
 
@@ -69,12 +70,14 @@ export const Web3ContextProvider = (props: PropsWithChildren) => {
       const account = await signer.getAddress()
       const chainId = (await provider.getNetwork())?.chainId;
       const nft = new ethers.Contract(config.NFT, nftABI, signer)
+      const auction = new ethers.Contract(config.AUCTION, auctionABI, signer)
       console.log(account, chainId);
       if(account || chainId) {
         updateContext?.({
           account,
           chainId,
           nft,
+          auction,
         } as Partial<Web3ContextValue>)
       }
     }catch (e) {

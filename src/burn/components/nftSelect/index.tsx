@@ -2,10 +2,16 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { Web3Context } from '../../../share/context/web3-context'
 import Button from '../button'
 import './index.css'
+import classNames from "classnames";
+import {config} from "../../config";
 
 
-function NftSelect() {
-  const {account, nft} = useContext(Web3Context)
+function NftSelect(props: {
+  visible: boolean,
+  onCancel: () => void
+  onSuccess: () => void
+}) {
+  const {account, nft, auction} = useContext(Web3Context)
 
   const [loading, setLoading] = useState<boolean>(true)
   const [nftIds, setNftIds] = useState<Array<number>>([])
@@ -28,15 +34,31 @@ function NftSelect() {
 
   const unselectedNftIfs = useMemo(() => nftIds.filter(id => !selectedNftIds.includes(id)), [nftIds, selectedNftIds])
 
-  const cancel = () => setSelectNftIds([])
+  const cancel = () => {
+    setSelectNftIds([])
+    props?.onCancel()
+  }
   
   const burn = useCallback(
-    () => {
-      alert(`${account} burn ${selectedNftIds.join(",")}`)
+    async () => {
+      if(loading) {
+        return false
+      }
+      try {
+        const tx = await auction.bid(selectedNftIds)
+        setLoading(true)
+        await tx.wait()
+        props?.onSuccess()
+      } catch (e) {
+        console.log(e);
+      }
+      setLoading(false)
     },
     [account, selectedNftIds])
 
-  return <div className='nft-select-box'>
+  return <div className={classNames('nft-select-box', {
+    'visible': props.visible
+  })}>
     <div className='id-selection'>
       <div className='unselected'>
         {unselectedNftIfs.map(id => <span className='unselectedItem' key={id} onClick={() => selectId(id)}>#{id}</span>)}
@@ -46,8 +68,10 @@ function NftSelect() {
       </div>
     </div>
     <div className="select-actions">
-      <Button size="XS" outlined onClick={cancel}>取消</Button>
-      <Button size="XS" onClick={burn}>燃烧</Button>
+      <Button size="XS" outlined onClick={cancel}>Cancel</Button>
+      <Button size="XS" onClick={burn} disabled={loading}>
+        {loading ? 'Burning...' : 'Burn'}
+      </Button>
     </div>
   </div>
   
