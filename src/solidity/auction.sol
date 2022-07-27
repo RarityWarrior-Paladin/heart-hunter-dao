@@ -62,11 +62,24 @@ contract LoveLovesAuction is Ownable, ERC721Holder {
         return biders.length;
     }
 
-    function page(uint256 pageIndex, uint256 pageSize) public view returns (address[] memory list) {
+    function getBurnInfo(uint index) public view returns(address bider, uint burns) {
+        bider = biders[index];
+        burns = biderBurns[bider];
+    }
+
+    struct BurnInfo {
+      address bider;
+      uint burns;
+    }
+
+    function page(uint256 pageIndex, uint256 pageSize) public view returns (BurnInfo[] memory burners) {
         uint256 start = pageIndex * pageSize;
         uint256 end = _min(start + pageSize, biders.length);
+        uint256 length = end - start;
+        burners = new BurnInfo[](length);
         for (uint i = 0; i < end ; i++) {
-            list[i] = biders[start + i];
+            (address bider, uint burns) = getBurnInfo(start + i);
+            burners[i] = BurnInfo(bider, burns);
         }
     }
 
