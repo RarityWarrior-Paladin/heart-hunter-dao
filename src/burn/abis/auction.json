@@ -54,14 +54,8 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "transferOwnership",
+    "inputs": [],
+    "name": "toggleOpen",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -110,8 +104,14 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "toggleOpen",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -119,21 +119,16 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
+        "internalType": "address",
         "name": "",
-        "type": "uint256"
+        "type": "address"
       }
     ],
-    "name": "biderInfo",
+    "name": "biderBurns",
     "outputs": [
       {
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      },
-      {
         "internalType": "uint256",
-        "name": "total",
+        "name": "",
         "type": "uint256"
       }
     ],
@@ -143,16 +138,40 @@
   {
     "inputs": [
       {
-        "internalType": "address",
+        "internalType": "uint256",
         "name": "",
-        "type": "address"
+        "type": "uint256"
       }
     ],
     "name": "biders",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "address",
         "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "index",
+        "type": "uint256"
+      }
+    ],
+    "name": "getBurnInfo",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "bider",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "burns",
         "type": "uint256"
       }
     ],
@@ -204,17 +223,17 @@
         "components": [
           {
             "internalType": "address",
-            "name": "account",
+            "name": "bider",
             "type": "address"
           },
           {
             "internalType": "uint256",
-            "name": "total",
+            "name": "burns",
             "type": "uint256"
           }
         ],
-        "internalType": "struct BidInfo[]",
-        "name": "list",
+        "internalType": "struct LoveLovesAuction.BurnInfo[]",
+        "name": "burners",
         "type": "tuple[]"
       }
     ],

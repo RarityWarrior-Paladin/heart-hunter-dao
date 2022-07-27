@@ -74,7 +74,7 @@ export const Web3ContextProvider = (props: PropsWithChildren) => {
       console.log(account, chainId);
       if(account || chainId) {
         updateContext?.({
-          account,
+          account: account.toLowerCase(),
           chainId,
           nft,
           auction,

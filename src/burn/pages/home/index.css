@@ -119,6 +119,19 @@
     overflow: auto;
 }
 
+.rank-item {
+    display: flex;
+    gap: 15px;
+}
+
+.rank-address {
+    flex : 1;
+}
+
+.rank-item-self {
+    color: #FC8369;
+}
+
 .gallery {
     display: grid;
     column-gap: 50px;
@@ -178,4 +191,10 @@
     .gallery {
         grid-template-columns: 1fr 1fr;
     }
+}
+
+.loading {
+    font-size: 18px;
+    text-align: center;
+    line-height: 100px;
 }

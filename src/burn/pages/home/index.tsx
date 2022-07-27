@@ -2,9 +2,10 @@ import {Web3Context} from "../../../share/context/web3-context";
 import NftSelect from "../../components/nftSelect";
 import ImageGallery from 'react-image-gallery';
 import { SimpleImg } from 'react-simple-img';
+import toast, { Toaster } from 'react-hot-toast';
 import "./index.css";
 import Button from "../../components/button";
-import {useContext, useEffect, useState} from "react";
+import {createRef, useContext, useEffect, useState} from "react";
 import {config} from "../../config";
 import Timer from "../../components/timer";
 import image1 from "../../assets/galley/1.jpg";
@@ -12,6 +13,7 @@ import image2 from "../../assets/galley/2.png";
 import RankList from "./rank";
 import albums from "./album-data";
 
+console.log(toast);
 
 const images = [
   {
@@ -39,13 +41,24 @@ function Home() {
   const [visible , setVisible] = useState<boolean>()
   const [approving , setApproving] = useState<boolean>()
   const [isApprove , setIsApprove] = useState<boolean>()
+  const [isOpen , setIsOpen] = useState<boolean>()
+  const [burnAmount , setBurnAmount] = useState<number>()
+
+  const rankRef = createRef();
 
   const load = async (account: string) => {
     setLoading(true)
-    const approve = await nft.isApprovedForAll(account, config.AUCTION)
-    // const info = await auction.biderInfo(0)
-    // console.log('info', info);
-    setIsApprove(approve)
+
+    const open = await auction.isOpen()
+
+    setIsOpen(open)
+
+    if(account) {
+      const approve = await nft.isApprovedForAll(account, config.AUCTION)
+      const amount = await auction.biderBurns(account)
+      setIsApprove(approve)
+      setBurnAmount(amount.toString() * 1)
+    }
     setLoading(false)
   }
 
@@ -84,16 +97,20 @@ function Home() {
           <h1>HeartHunter Painting </h1>
           <h2>Love NFTs Auction</h2>
           <h3>Artist:  <strong>FFAN</strong></h3>
-          <div>You have burned：{0}</div>
-          {isApprove && <Button className="button" onClick={() => {
+          <div>You have burned：{burnAmount}</div>
+          {isApprove && isOpen && <Button className="button" onClick={() => {
             setVisible(true)
           }}>Choose NFT</Button>}
-          {!isApprove && <Button className="button" disabled={approving} onClick={handleApprove}>
+          {isApprove && !isOpen && <Button className="button" disabled >NOT START</Button>}
+          {isApprove === false && <Button className="button" disabled={approving} onClick={handleApprove}>
             {approving ? 'Approving...' : 'Approve'}
           </Button>}
+          {isApprove === undefined && <Button className="button" disabled>
+            Loading
+          </Button>}
           <div>Start at: </div>
-          <div className="timer"><Timer startTime={1658930400000} onFinish={() => load(account)}/></div>
-          <div>Jul 27, 2022 22:00:00 PM</div>
+          <div className="timer"><Timer startTime={1659016800000} onFinish={() => load(account)}/></div>
+          <div>Jul 28, 2022 22:00:00 PM</div>
         </div>
       </div>
       <NftSelect
@@ -101,7 +118,8 @@ function Home() {
         onSuccess={() => {
           load(account)
           setVisible(false)
-          alert('burn success')
+          rankRef.current?.load()
+          toast.success('Burn Success')
         }}
         onCancel={() => {
           setVisible(false)
@@ -122,7 +140,7 @@ function Home() {
             <p>All addresses participating in the burning will participate in a mysterious airdrop (all addresses)</p>
           </div>
           <div className="info-rank">
-            <RankList />
+            <RankList onRef={rankRef} />
           </div>
         </div>
       </div>
@@ -130,8 +148,8 @@ function Home() {
         <h3 className="module-title">Art Work</h3>
         <div className="gallery">
           {
-            albums.map((item) => {
-              return <div className="gallery-item" >
+            albums.map((item, index) => {
+              return <div className="gallery-item" key={index} >
                 <SimpleImg height={290} alt={item.title} src={item.image} imgStyle={{objectFit: 'contain'}}/>
                 <div className="gallery-title">{item.title}</div>
               </div>
@@ -139,6 +157,7 @@ function Home() {
           }
         </div>
       </div>
+      <Toaster />
     </div>
   )
 }

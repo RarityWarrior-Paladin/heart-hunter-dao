@@ -3,7 +3,6 @@ import { Web3Context } from '../../../share/context/web3-context'
 import Button from '../button'
 import './index.css'
 import classNames from "classnames";
-import {config} from "../../config";
 
 
 function NftSelect(props: {
@@ -20,7 +19,6 @@ function NftSelect(props: {
     console.log(account)
     if (!account) return
     nft.tokensOfOwner(account).then(ids => {
-      console.log(ids)
       setNftIds(ids.map(id => id.toNumber()))
       setLoading(false)
     })

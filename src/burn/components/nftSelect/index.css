@@ -106,5 +106,5 @@
 }
 
 .select-actions .ui-button {
-  width: 80px;
+  min-width: 80px;
 }
