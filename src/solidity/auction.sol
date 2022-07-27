@@ -74,10 +74,9 @@ contract LoveLovesAuction is Ownable, ERC721Holder {
 
     function page(uint256 pageIndex, uint256 pageSize) public view returns (BurnInfo[] memory burners) {
         uint256 start = pageIndex * pageSize;
-        uint256 end = _min(start + pageSize, biders.length);
-        uint256 length = end - start;
+        uint256 length = _min(pageSize, start > biders.length ? 0: biders.length - start);
         burners = new BurnInfo[](length);
-        for (uint i = 0; i < end ; i++) {
+        for (uint i = 0; i < length ; i++) {
             (address bider, uint burns) = getBurnInfo(start + i);
             burners[i] = BurnInfo(bider, burns);
         }
