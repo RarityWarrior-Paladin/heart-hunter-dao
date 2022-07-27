@@ -1,6 +1,7 @@
 import {Web3Context} from "../../../share/context/web3-context";
 import NftSelect from "../../components/nftSelect";
 import ImageGallery from 'react-image-gallery';
+import { SimpleImg } from 'react-simple-img';
 import "./index.css";
 import Button from "../../components/button";
 import {useContext, useEffect, useState} from "react";
@@ -9,6 +10,8 @@ import Timer from "../../components/timer";
 import image1 from "../../assets/galley/1.jpg";
 import image2 from "../../assets/galley/2.png";
 import RankList from "./rank";
+import albums from "./album-data";
+
 
 const images = [
   {
@@ -69,7 +72,7 @@ function Home() {
   return (
     <div>
       <div className="module-top">
-        <div className="gallery">
+        <div className="slider">
           <ImageGallery
               showFullscreenButton={false}
               showPlayButton={false}
@@ -88,7 +91,6 @@ function Home() {
           {!isApprove && <Button className="button" disabled={approving} onClick={handleApprove}>
             {approving ? 'Approving...' : 'Approve'}
           </Button>}
-
           <div>Start at: </div>
           <div className="timer"><Timer startTime={1658930400000} onFinish={() => load(account)}/></div>
           <div>Jul 27, 2022 22:00:00 PM</div>
@@ -126,6 +128,16 @@ function Home() {
       </div>
       <div className="module-gallery">
         <h3 className="module-title">Art Work</h3>
+        <div className="gallery">
+          {
+            albums.map((item) => {
+              return <div className="gallery-item" >
+                <SimpleImg height={290} alt={item.title} src={item.image} imgStyle={{objectFit: 'contain'}}/>
+                <div className="gallery-title">{item.title}</div>
+              </div>
+            })
+          }
+        </div>
       </div>
     </div>
   )

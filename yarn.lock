@@ -1910,6 +1910,11 @@ react-router@6.3.0:
   dependencies:
     history "^5.2.0"
 
+react-simple-img@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-simple-img/-/react-simple-img-3.0.0.tgz#e56dc2f318e9fab3fe5d95a429afd799d1a90448"
+  integrity sha512-I0sG/GgY9c+04BgWf1YRlipWBQxR3oG2s/bagU8EO7zals3/Vkfk1PJMeYh/wHfjxJtUmal+y7HWEBm4MzXVsQ==
+
 react@^17.0.0:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"

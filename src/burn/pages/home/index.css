@@ -8,7 +8,7 @@
 }
 
 
-.gallery {
+.slider {
     width: 300px;
 }
 
@@ -117,4 +117,24 @@
 .ranklist-content {
     height: 185px;
     overflow: auto;
+}
+
+.gallery {
+    display: grid;
+    column-gap: 50px;
+    row-gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.gallery-item {
+    text-align: center;
+}
+
+.gallery-title {
+    padding-top: 5px;
+}
+
+.module-gallery {
+    padding-bottom: 50px;
 }
