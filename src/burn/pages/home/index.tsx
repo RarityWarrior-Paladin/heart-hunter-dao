@@ -13,24 +13,14 @@ import image2 from "../../assets/galley/2.png";
 import RankList from "./rank";
 import albums from "./album-data";
 
-console.log(toast);
-
 const images = [
   {
     original: image1,
     thumbnail: image1,
-    originalWidth: 220,
-    originalHeight: 220,
-    thumbnailHeight: 50,
-    thumbnailWidth: 50
   },
   {
     original: image2,
     thumbnail: image2,
-    originalWidth: 220,
-    originalHeight: 220,
-    thumbnailHeight: 50,
-    thumbnailWidth: 50
   },
 ];
 
