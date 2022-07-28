@@ -1,4 +1,4 @@
 export const config = {
-  NFT: '0xa87f3c5a9051eaba0df2419d6a607e45bf3bd113',
-  AUCTION: '0x8908bf2637afc01030f1dfa7e27b72a1501ef2d4',
+  NFT: '0xd44dc6a31c984b1e138894288985edd17c83d623',
+  AUCTION: '0x8a529d25d7b3ca7a754f336a69d0488f6cb6f559',
 }
