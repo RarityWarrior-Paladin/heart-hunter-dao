@@ -54,22 +54,24 @@ function NftSelect(props: {
     },
     [account, selectedNftIds])
 
-  return <div className={classNames('nft-select-box', {
+  return <div className={classNames('nft-select-box-container', {
     'visible': props.visible
   })}>
-    <div className='id-selection'>
-      <div className='unselected'>
-        {unselectedNftIfs.map(id => <span className='unselectedItem' key={id} onClick={() => selectId(id)}>#{id}</span>)}
+    <div className="nft-select-box">
+      <div className='id-selection'>
+        <div className='unselected'>
+          {unselectedNftIfs.map(id => <span className='unselectedItem' key={id} onClick={() => selectId(id)}>#{id}</span>)}
+        </div>
+        <div className='selected'>
+          {selectedNftIds.map(id => <span className='selectedItem' key={id}>#{id}<i onClick={() => unselectId(id)} className='deleteSelectedItem'/></span>)}
+        </div>
       </div>
-      <div className='selected'>
-        {selectedNftIds.map(id => <span className='selectedItem' key={id}>#{id}<i onClick={() => unselectId(id)} className='deleteSelectedItem'/></span>)}
+      <div className="select-actions">
+        <Button size="XS" outlined onClick={cancel}>Cancel</Button>
+        <Button size="XS" onClick={burn} disabled={loading}>
+          {loading ? 'Burning...' : 'Burn'}
+        </Button>
       </div>
-    </div>
-    <div className="select-actions">
-      <Button size="XS" outlined onClick={cancel}>Cancel</Button>
-      <Button size="XS" onClick={burn} disabled={loading}>
-        {loading ? 'Burning...' : 'Burn'}
-      </Button>
     </div>
   </div>
   
