@@ -92,9 +92,9 @@ function Home() {
             setVisible(true)
           }}>Choose NFT</Button>}
           {isApprove && !isOpen && <Button className="button" disabled >ENDED</Button>}
-          {isApprove === false && <Button className="button" disabled={approving} onClick={handleApprove}>
-            {approving ? 'Approving...' : 'Approve'}
-          </Button>}
+          {/*{isApprove === false && <Button className="button" disabled={approving} onClick={handleApprove}>*/}
+          {/*  {approving ? 'Approving...' : 'Approve'}*/}
+          {/*</Button>}*/}
           {isApprove === undefined && <Button className="button" disabled>
             Loading
           </Button>}
