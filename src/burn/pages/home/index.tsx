@@ -91,7 +91,7 @@ function Home() {
           {isApprove && isOpen && <Button className="button" onClick={() => {
             setVisible(true)
           }}>Choose NFT</Button>}
-          {isApprove && !isOpen && <Button className="button" disabled >ENDED</Button>}
+          {!isOpen && <Button className="button" disabled >ENDED</Button>}
           {/*{isApprove === false && <Button className="button" disabled={approving} onClick={handleApprove}>*/}
           {/*  {approving ? 'Approving...' : 'Approve'}*/}
           {/*</Button>}*/}
