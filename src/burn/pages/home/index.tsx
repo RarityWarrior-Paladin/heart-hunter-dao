@@ -95,9 +95,9 @@ function Home() {
           {/*{isApprove === false && <Button className="button" disabled={approving} onClick={handleApprove}>*/}
           {/*  {approving ? 'Approving...' : 'Approve'}*/}
           {/*</Button>}*/}
-          {isApprove === undefined && <Button className="button" disabled>
-            Loading
-          </Button>}
+          {/*{isApprove === undefined && <Button className="button" disabled>*/}
+          {/*  Loading*/}
+          {/*</Button>}*/}
           {/*{*/}
           {/*    !isOpen && <>*/}
           {/*      <div>Start at:</div>*/}

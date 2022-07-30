@@ -5,7 +5,7 @@ import classNames from "classnames";
 import {orderBy} from "lodash";
 import {formatAddress} from "../../utils";
 
-const pageSize = 50
+const pageSize = 100
 
 function RankList(props: {
     onRef: any
@@ -23,7 +23,7 @@ function RankList(props: {
 
         const total = (await auction.totalBider()).toString() * 1
 
-        const page = Math.ceil(total / 50)
+        const page = Math.ceil(total / pageSize)
 
         let list = []
 
