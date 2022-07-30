@@ -98,18 +98,18 @@ function Home() {
           {isApprove === undefined && <Button className="button" disabled>
             Loading
           </Button>}
-          {
-              !isOpen && <>
-                <div>Start at:</div>
-                <div className="timer"><Timer startTime={1659016800000} onFinish={() => load(account)}/></div>
-              </>
-          }
-          {
-              isOpen && <>
-                <div>End at:</div>
-                <div className="timer"><Timer startTime={1659189600000} onFinish={() => load(account)}/></div>
-              </>
-          }
+          {/*{*/}
+          {/*    !isOpen && <>*/}
+          {/*      <div>Start at:</div>*/}
+          {/*      <div className="timer"><Timer startTime={1659016800000} onFinish={() => load(account)}/></div>*/}
+          {/*    </>*/}
+          {/*}*/}
+          {/*{*/}
+          {/*    isOpen && <>*/}
+          {/*      <div>End at:</div>*/}
+          {/*      <div className="timer"><Timer startTime={1659189600000} onFinish={() => load(account)}/></div>*/}
+          {/*    </>*/}
+          {/*}*/}
           <div>Jul 28, 2022 22:00 PM - Jul 30, 2022 22:00 PM</div>
           <div></div>
         </div>
